@@ -7,20 +7,36 @@
     <script type="text/jsx">
       const app = document.getElementById('app');
       const root = ReactDOM.createRoot(app);
-      function Header() {
-        return (<h1>header</h1>);
+
+      function Header({head}) {
+        if (head != null) {
+          return (<h1>{head}</h1>)
+        }
+        return (<h1>Default Title</h1>)
       }
-      function Body() {
+      
+      function Credits(props) {
+        const names = props.arr
         return (
-        <div>
-            {}
-            <Header/>
-            <p>
-                meow meow meow
-            </p>
-        </div>);
+          <div>
+            <ul>
+              {names.map((name)=>(
+                <li key = {name}>{name}</li>
+              ))}
+            </ul>
+          </div>
+        )
       }
-      root.render(Body());
+
+      var namez = ['Chris', 'Ethan', 'Dawson', 'Lenhardt']
+
+      function App(props) {
+        return(<div>
+          <Header head={props.head}/>
+          <Credits arr={props.arr}/>
+        </div>)
+      }
+      root.render(<App head="meowski" arr={namez}/>);
     </script>
   </body>
 </html>
